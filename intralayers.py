@@ -5,21 +5,27 @@ Created on Fri Nov 06 15:16:24 2015
 @author: Stephen
 """
 
-
 class Intralayer:
         
         def __init__(self):
             null = 0
             
-        def interaction(self,lattice,grid):
-            if lattice == 'graphene':
+        def interaction(self,mat,grid):
+            if mat == 'graphene':
                 return self.int_graphene(grid)
             
         def int_graphene(self,grid):
             
-            t1 = 1
-            t2 = 2
-            t3 = 3
+            #!! need to look up which t's correspond to which pair geometery!!
+            
+            t1 = -2.892
+            t2 =  0.243
+            t3 = -0.266
+            t4 =  0.024
+            t5 =  0.052
+            t6 = -0.021
+            t7 = -0.015
+            t8 = -0.021
             
             out_array = [(0,0,0,0) for s in xrange(0,21)]
             k = 0            
