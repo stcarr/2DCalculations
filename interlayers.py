@@ -8,26 +8,27 @@ import math
 
 class Interlayer:
         
+        # Initialising Interlayer does not change any of its properties
+        # this is used as a class which returns interlayer hamiltonian energies
+        # and so it is used as a sort of library look-up by heterostructure.py
         def __init__(self):
             null = 0
             
-        def interaction(self,mat1,mat2,grid1,grid2,r,theta):
+        def interaction(self,mat1,mat2,grid1,grid2,r,a1,a2,r12,r21):
             if mat1 == 'graphene':
                 if mat2 == 'graphene':
-                    return self.int_graphene_graphene(grid1,grid2,r,theta)
+                    return self.int_graphene_graphene(grid1,grid2,r,a1,a2,r12,r21)
             
-        def int_graphene_graphene(self,grid1,grid2,r,theta):
+        def int_graphene_graphene(self,grid1,grid2,r,a1,a2,r12,r21):
         
             a = 2.46
-            
-            # need to fix these 2, AA vs AB etc.
-            theta12 = theta
-            theta21 = theta
-            # end fix
 
             lambda0 = 0.3155
             lambda3 = -0.0688
             lambda6 = -0.0083
+            
+            if r == 0:
+                return lambda0
             
             xi0 = 1.7543
             xi3 = 3.4692
@@ -40,6 +41,24 @@ class Interlayer:
             kappa0 = 2.0010
             kappa3 = False
             kappa6 = 1.5731
+            
+            pre12 = (r**2+a1**2-r12**2)/(2*r*a1)
+            pre21 = (r**2+a2**2-r21**2)/(2*r*a2)
+            
+            if pre12 >= 1.0:
+                theta12 = 0
+            elif pre12 <= -1.0:
+                theta12 = math.pi
+            else:
+                theta12 = math.acos((r**2+a1**2-r12**2)/(2*r*a1))
+                
+            if pre21 >= 1.0:
+                theta21 = 0
+            elif pre21 <= -1.0:
+                theta21 = math.pi
+            else:
+                theta21 = math.acos((r**2+a2**2-r21**2)/(2*r*a2))
+
             
             def V0(r):
                 return lambda0*math.exp(-xi0*(r/a)**2)*math.cos(kappa0*(r/a))

@@ -7,6 +7,9 @@ Created on Fri Nov 06 15:16:24 2015
 
 class Intralayer:
         
+        # Initialising Intralayer does not change any of its properties
+        # this is used as a class which returns intralayer hamiltonian energies
+        # and so it is used as a sort of library look-up by sheet.py
         def __init__(self):
             null = 0
             
@@ -17,6 +20,10 @@ class Intralayer:
         def int_graphene(self,grid):
             
             #!! need to look up which t's correspond to which pair geometery!!
+                        
+            i = grid[0]
+            j = grid[1]
+            s = grid[2]
             
             t1 = -2.892
             t2 =  0.243
@@ -27,9 +34,125 @@ class Intralayer:
             t7 = -0.015
             t8 = -0.021
             
-            out_array = [(0,0,0,0) for s in xrange(0,21)]
-            k = 0            
+            outarray = [(0,0,0,0) for y in xrange(0,39)]
+                
             
+            if s == 0:
+                #t1 hopping
+                outarray[0]  = (i  ,j  ,1,t1)
+                outarray[1]  = (i-1,j  ,1,t1)
+                outarray[2]  = (i  ,j-1,1,t1)
+        
+                #t2 hopping
+                outarray[3]  = (i  ,j+1,0,t2)
+                outarray[4]  = (i+1,j  ,0,t2)
+                outarray[5]  = (i+1,j-1,0,t2)
+                outarray[6]  = (i  ,j-1,0,t2)
+                outarray[7]  = (i-1,j  ,0,t2)
+                outarray[8]  = (i-1,j+1,0,t2)
+                
+                #t3 hopping
+                outarray[9]  = (i-1,j-1,1,t3)
+                outarray[10] = (i+1,j-1,1,t3)
+                outarray[11] = (i-1,j+1,1,t3)
+                
+                #t4 hopping
+                outarray[12] = (i  ,j+1,1,t4)
+                outarray[13] = (i+1,j  ,1,t4)
+                outarray[14] = (i+1,j-2,1,t4)
+                outarray[15] = (i  ,j-2,1,t4)
+                outarray[16] = (i-2,j  ,1,t4)
+                outarray[17] = (i-2,j+1,1,t4)
+                
+                #t5 hopping
+                outarray[18] = (i-1,j+2,0,t5)
+                outarray[19] = (i+1,j+1,0,t5)
+                outarray[20] = (i+2,j-1,0,t5)
+                outarray[21] = (i+1,j-2,0,t5)
+                outarray[22] = (i-1,j-1,0,t5)
+                outarray[23] = (i-2,j+1,0,t5)
+                
+                #t6 hopping
+                outarray[24] = (i  ,j+2,0,t6)
+                outarray[25] = (i+2,j  ,0,t6)
+                outarray[26] = (i+2,j-2,0,t6)
+                outarray[27] = (i  ,j-2,0,t6)
+                outarray[28] = (i-2,j  ,0,t6)
+                outarray[29] = (i-2,j+2,0,t6)
+                
+                #t7 hopping
+                outarray[30] = (i-2,j+2,1,t7)
+                outarray[31] = (i-1,j+2,1,t7)
+                outarray[32] = (i+2,j-1,1,t7)
+                outarray[33] = (i+2,j-2,1,t7)
+                outarray[34] = (i-2,j-1,1,t7)
+                outarray[35] = (i-1,j-2,1,t7)
+                
+                #t8 hopping
+                outarray[36] = (i+1,j+1,1,t8)
+                outarray[37] = (i+1,j-3,1,t8)
+                outarray[38] = (i-3,j+1,1,t8)
+                
+            if s == 1:
+                #t1 hopping
+                outarray[0]  = (i  ,j  ,0,t1)
+                outarray[1]  = (i+1,j  ,0,t1)
+                outarray[2]  = (i  ,j+1,0,t1)
+        
+                #t2 hopping
+                outarray[3]  = (i  ,j+1,1,t2)
+                outarray[4]  = (i+1,j  ,1,t2)
+                outarray[5]  = (i+1,j-1,1,t2)
+                outarray[6]  = (i  ,j-1,1,t2)
+                outarray[7]  = (i-1,j  ,1,t2)
+                outarray[8]  = (i-1,j+1,1,t2)
+                
+                #t3 hopping
+                outarray[9]  = (i+1,j+1,0,t3)
+                outarray[10] = (i+1,j-1,0,t3)
+                outarray[11] = (i-1,j+1,0,t3)
+                
+                #t4 hopping
+                outarray[12] = (i  ,j+2,0,t4)
+                outarray[13] = (i-1,j+2,0,t4)
+                outarray[14] = (i+2,j  ,0,t4)
+                outarray[15] = (i+2,j-1,0,t4)
+                outarray[16] = (i  ,j-1,0,t4)
+                outarray[17] = (i-1,j  ,0,t4)
+                
+                #t5 hopping
+                outarray[18] = (i-1,j+2,1,t5)
+                outarray[19] = (i+1,j+1,1,t5)
+                outarray[20] = (i+2,j-1,1,t5)
+                outarray[21] = (i+1,j-2,1,t5)
+                outarray[22] = (i-1,j-1,1,t5)
+                outarray[23] = (i-2,j+1,1,t5)
+                
+                #t6 hopping
+                outarray[24] = (i  ,j+2,1,t6)
+                outarray[25] = (i+2,j  ,1,t6)
+                outarray[26] = (i+2,j-2,1,t6)
+                outarray[27] = (i  ,j-2,1,t6)
+                outarray[28] = (i-2,j  ,1,t6)
+                outarray[29] = (i-2,j+2,1,t6)
+                
+                #t7 hopping
+                outarray[30] = (i+1,j+2,0,t7)
+                outarray[31] = (i+2,j+1,0,t7)
+                outarray[32] = (i+2,j-2,0,t7)
+                outarray[33] = (i+1,j-2,0,t7)
+                outarray[34] = (i-2,j+1,0,t7)
+                outarray[35] = (i-2,j+2,0,t7)
+                
+                #t8 hopping
+                outarray[36] = (i-1,j+3,0,t8)
+                outarray[37] = (i+3,j-1,0,t8)
+                outarray[38] = (i-1,j-1,0,t8)
+            
+            return outarray
+                
+            
+            '''
             for n1 in self.n_graphene(grid):
                 
                 i1 = n1[0]
@@ -58,10 +181,13 @@ class Intralayer:
                                 j3 = n3[1]
                                 s3 = n3[2]
                                 
+                                #need a control statement to determine if its t3 or t4
                                 out_array[k] = [i3,j3,s3,t3]
+                                out_array[k] = [i3,j3,s3,t4]
                                 k += 1
             return out_array     
-                
+            '''
+            
         def n_graphene(self,grid):
             i = grid[0]
             j = grid[1]

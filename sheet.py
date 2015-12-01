@@ -116,9 +116,10 @@ class Sheet:
         
         k = self.grid_array[i][j][l]
         return k
-        
+    
+    #returns intralayer Hamiltonian (ie H_ii)
     def intraHamiltonian(self,type):
-        print 'Calculating intralyer H...'
+        print 'Calculating intralayer H...'
         H = lil_matrix((self.max_index,self.max_index))
         
         for k in xrange(self.max_index):
@@ -133,9 +134,8 @@ class Sheet:
                 s = energies[l][2]
                 t = energies[l][3]
                 
-                if i > 0 and i < self.max_shape[0] - self.min_shape[0]:
-                    if j > 0 and j < self.max_shape[1] - self.min_shape[1]:
-                        if s > 0 and s < self.atom_types:
+                if i >= 0 and i < self.max_shape[0] - self.min_shape[0]:
+                    if j >= 0 and j < self.max_shape[1] - self.min_shape[1]:
                             new_index = self.gridToIndex([i,j,s])
                             
                             if new_index != -1:
